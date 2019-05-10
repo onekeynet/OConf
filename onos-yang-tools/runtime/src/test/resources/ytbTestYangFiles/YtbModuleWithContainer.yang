@@ -1,0 +1,32 @@
+module YtbModuleWithContainer {
+    yang-version 1;
+    namespace "yms:test:ytb:module:with:container";
+    prefix "sch";
+    revision "2016-08-26";
+    container sched {
+        leaf predict {
+            type decimal64 {
+                fraction-digits 2;
+            }
+        }
+    }
+
+    grouping gr2 {
+        list listener {
+            key "wait";
+            leaf "wait" {
+                type string;
+            }
+        }
+    }
+
+    grouping gr1 {
+        container cont {
+            uses gr2;
+        }
+
+        uses gr2;
+    }
+
+    uses gr1;
+}

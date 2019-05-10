@@ -1,0 +1,114 @@
+module demo1 {
+    yang-version 1;
+    namespace "namespace1";
+    prefix "demo1";
+    revision "2013-07-15";
+    container device {
+
+        uses start-end-date-time;
+
+        list device {
+            key deviceid;
+            leaf deviceid {
+                type string;
+            }
+            leaf Customs-supervisor {
+                type empty;
+                description "name of the customs-supervisor.";
+            }
+
+            leaf Merchandiser-supervisor {
+                type string;
+                description "name of merchandiser-supervisor";
+            }
+
+            list Material-supervisor {
+                key "name";
+                leaf name {
+                    type string;
+                    description "name of logistics-supervisor";
+                }
+                leaf departmentId {
+                    type string;
+                    description "name of department";
+                 }
+            }
+
+            list General-supervisor {
+                key "name";
+                leaf name {
+                    type string;
+                }
+            }
+
+            list Supervisor {
+                key "name";
+                leaf name {
+                    type string;
+                }
+            }
+
+            container Purchasing-supervisor {
+                leaf purchasing-specialist {
+                    type string;
+                    description "name of the purchasing-specialist person";
+                }
+
+                leaf-list support {
+                    type string;
+                    description "name of the support person";
+                }
+            }
+
+            leaf-list Warehouse-supervisor {
+                type string;
+                description "name of the warehouse-supervisor's";
+            }
+
+            leaf Trading-supervisor {
+                type string;
+                description "name of the trading-supervisor";
+            }
+
+            leaf-list Employee-id {
+                type string;
+                description "list of the employee id";
+            }
+            container cont7 {
+               leaf leaf8 {
+                  type string;
+               }
+            }
+            container cont8 {
+               leaf leaf9 {
+                  type boolean;
+               }
+            }
+        }
+    }
+
+    grouping start-end-date-time
+        {
+            leaf req-start-date-time
+            {
+                type string {
+                         pattern '\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(\.\d+)?(Z|[\+\-]\d{2}:\d{2})';
+                               }
+            }
+            leaf req-end-date-time
+            {
+                type string {
+                         pattern '\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(\.\d+)?'
+                               + '(Z|[\+\-]\d{2}:\d{2})';
+                               }
+            }
+            description "";
+        }
+
+    list list1 {
+        key leaf1;
+        leaf leaf1 {
+            type string;
+        }
+    }
+}

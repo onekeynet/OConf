@@ -1,0 +1,37 @@
+module hello {
+    yang-version 1;
+    namespace "urn:params:xml:ns:yang:hello";
+    prefix "hello";
+
+    revision "2015-01-05" {
+        description "Initial revision of hello model";
+    }
+
+    rpc hello-world {
+        input {
+            leaf x {
+                type string;
+            }
+        }
+
+        output {
+            leaf greeting {
+                type string;
+            }
+        }
+    }
+
+    rpc hello-second {
+        input {
+            leaf x {
+                type binary;
+            }
+        }
+
+        output {
+            leaf greeting {
+                type binary;
+            }
+        }
+    }
+}

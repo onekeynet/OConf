@@ -1,0 +1,32 @@
+submodule list2 {
+
+    yang-version 1;
+    belongs-to "list"{
+        prefix l1;
+    }
+    include list3;
+    organization "ON-LAB";
+
+    description "This module defines for list.";
+
+    revision "2016-06-24" {
+        description "Initial revision.";
+    }
+
+    list l2 {
+        key "k1";
+            leaf k1 {
+               type string;
+            }
+
+            container c1 {
+                leaf leaf_c1 {
+                  type string;
+                }
+            }
+    }
+
+    leaf-list leaf2 {
+        type string;
+    }
+}
