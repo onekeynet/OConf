@@ -1,0 +1,1 @@
+build --javacopt "-Xep:ArrayHashCode:WARN"
