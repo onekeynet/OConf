@@ -15,7 +15,7 @@ module openconfig-platform-transceiver {
   import openconfig-types { prefix oc-types; }
   import openconfig-extensions { prefix oc-ext; }
   import openconfig-yang-types { prefix oc-yang; }
-  import openconfig-platform-types {prefix oc-platform-types; }
+
 
   // meta
   organization "OpenConfig working group";
@@ -457,7 +457,7 @@ module openconfig-platform-transceiver {
 
     uses port-transceiver-top {
       when "current()/oc-platform:state/" +
-        "oc-platform:type = 'oc-platform-types:TRANSCEIVER'" {
+        "oc-platform:type = 'TRANSCEIVER'" {
         description
           "Augment is active when component is of type TRANSCEIVER";
       }

@@ -40,3 +40,4 @@ dependency-reduced-pom.xml
 YangLexer.tokens
 
 bazel-*
+.ijwb/

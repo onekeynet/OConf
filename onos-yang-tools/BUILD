@@ -1,13 +1,17 @@
-JAVA_FILES = "src/main/java/**/*.java"
-RESOURCES_FILES = "src/main/resources/**"
+load("//tools:variables.bzl", "JAVA_FILES", "RESOURCES_FILES")
 
+
+# Usage:
+#   CMD modelId outputDir [-d dependencyJar1 -d dependencyJar2...] inputYangFile1 inputYangFile2...
+# Example:
+#   ./bazel-bin/onos-yang-tools/onos_yang_compiler test-odtn test yang/openconfig-odtn/*.yang
 java_binary(
     name = "onos_yang_compiler",
     main_class = "org.onosproject.yang.compiler.main.YangCompilerMain",
     visibility = ["//visibility:public"],
     runtime_deps = [
-        ":yanglib",
-#        "@slf4j_nop//jar",  # TODO: Change to jdk14 after fixing verbosity
+        "//onos-yang-tools:yanglib",
+        "@maven//:org_slf4j_slf4j_nop",
     ],
 )
 

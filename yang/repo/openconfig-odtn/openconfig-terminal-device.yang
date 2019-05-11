@@ -1126,7 +1126,7 @@ module openconfig-terminal-device {
 
   augment "/oc-platform:components/oc-platform:component" {
     when "/oc-platform:components/oc-platform:component/" +
-      "oc-platform:state/oc-platform:type = 'oc-opt-types:OPTICAL_CHANNEL'" {
+      "oc-platform:state/oc-platform:type = 'OPTICAL_CHANNEL'" {
       description
         "Augment is active when component is of type
         OPTICAL_CHANNEL";

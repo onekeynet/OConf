@@ -629,6 +629,7 @@ public class YangCompilerManager implements YangCompilerService {
             }
 
             while (enumEntries.hasMoreElements()) {
+                // traverse all directories and files in this Jar.
                 JarEntry file = (JarEntry) enumEntries.nextElement();
                 if (file.getName().endsWith(YANG_META_DATA) ||
                         file.getName().endsWith(".yang")) {
