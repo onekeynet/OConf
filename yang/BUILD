@@ -9,31 +9,43 @@ yang_library(
     srcs = glob([
         "repo/openconfig-odtn/*.yang",
     ]),
-    model_id = ODTN_OC_MODEL, ## TODO I don't know the usage for the input model_id.
+    model_id = ODTN_OC_MODEL,
     visibility = ["//visibility:public"],
 )
 
-yang_library(
-    name = ODTN_TAPI_MODEL,
-    deps = [
-            "//onos-yang-tools:yanglib",
-        ],
-    srcs = glob([
-        "repo/tapi/*.yang",
-    ]),
-    model_id = ODTN_TAPI_MODEL,
-    visibility = ["//visibility:public"],
-)
 
+## import generated jar from yang files
+#java_library(
+#    name = "lib-" + ODTN_OC_MODEL,
+#    visibility = ["//visibility:public"],
+#    srcs = [
+#        "//yang:" + ODTN_OC_MODEL,
+#    ],
+#    deps = [
+#      "//onos-yang-tools:yanglib",
+#    ],
+#)
 
 java_library(
     name = "yang-registor",
     visibility = ["//visibility:public"],
     deps = [
-        "//yang:" + ODTN_OC_MODEL,
-        "//yang:" + ODTN_TAPI_MODEL,
+#        "//yang:lib-" + ODTN_OC_MODEL,
+        "@maven//:org_slf4j_slf4j_api",
+        "@maven//:org_slf4j_slf4j_jdk14",
+        "@maven//:com_google_guava_guava",
+        "//onos-yang-tools:yanglib",
     ],
     srcs = glob([
         JAVA_FILES,
-    ]),
+    ]) + ["//yang:" + ODTN_OC_MODEL],
+    resource_jars = ["//yang:" + ODTN_OC_MODEL],
+)
+
+
+# Only for testing.
+java_binary(
+    name = "yang-test",
+    main_class = "org.onekeynet.oconf.yang.registor.OpenConfigOdtnModelRegistrator",
+    runtime_deps = ["//yang:yang-registor"],
 )

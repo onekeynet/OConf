@@ -28,6 +28,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.util.Map;
+
 import static org.onosproject.yang.runtime.helperutils.YangApacheUtils.getYangModel;
 
 /**
@@ -37,15 +38,14 @@ public abstract class AbstractYangModelRegistrator {
 
     protected final Logger log = LoggerFactory.getLogger(getClass());
     private final Class<?> loaderClass;
-    private final String jarPath;
 
     protected Map<YangModuleId, AppModuleInfo> appInfo;
     protected YangModel model;
     private ModelRegistrationParam registrationParam;
 
-    private YangModelRegistry modelRegistry = YangRuntimeManager.getInstance();
+    protected YangModelRegistry modelRegistry = YangRuntimeManager.getInstance();
 
-    private YangClassLoaderRegistry sourceResolver = YangRuntimeManager.getInstance();
+    protected YangClassLoaderRegistry sourceResolver = YangRuntimeManager.getInstance();
 
     /**
      * Binds the specified YANG model registry.
@@ -89,19 +89,21 @@ public abstract class AbstractYangModelRegistrator {
      *
      * @param loaderClass class whose class loader is to be used for locating
      *                    schema data
-     * @param jarPath jar file path.
+     * @param appInfo     application information
      */
     protected AbstractYangModelRegistrator(Class<?> loaderClass,
-                                           String jarPath) {
+                                           Map<YangModuleId, AppModuleInfo> appInfo) {
         this.loaderClass = loaderClass;
-//        this.appInfo = appInfo;
-        this.jarPath = jarPath;
+        this.appInfo = appInfo;
+        activate();
     }
 
-//    @Activate
+    /**
+     * TODO
+     */
     protected void activate() {
         log.info("Starting...");
-        model = getYangModel(jarPath);
+        model = getYangModel(loaderClass);
         log.info("ModelId: {}", model.getYangModelId());
         ModelRegistrationParam.Builder b =
                 DefaultModelRegistrationParam.builder().setYangModel(model);
@@ -120,10 +122,13 @@ public abstract class AbstractYangModelRegistrator {
         return b;
     }
 
-//    @Deactivate
+    /**
+     * TODO: We don't need this function in OConf at all.
+     */
     protected void deactivate() {
         modelRegistry.unregisterModel(registrationParam);
         sourceResolver.unregisterClassLoader(model.getYangModelId());
         log.info("Stopped");
     }
 }
+

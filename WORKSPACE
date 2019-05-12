@@ -22,10 +22,11 @@ maven_install(
         "com.fasterxml.jackson.core:jackson-annotations:2.9.5",
         "org.apache.servicemix.bundles:org.apache.servicemix.bundles.dom4j:1.6.1_5",
         "org.antlr:antlr4-runtime:4.5.3",
-        "org.slf4j:slf4j-nop:1.7.25",
+#        "org.slf4j:slf4j-nop:1.7.25",
         # chaining dependencies
         "com.google.guava:guava:22.0",
         "com.fasterxml.jackson.core:jackson-core:2.9.5",
+        "org.slf4j:slf4j-jdk14:1.7.25"
     ],
     repositories = [
         "https://repo1.maven.org/maven2",

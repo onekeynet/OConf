@@ -11,7 +11,7 @@ java_binary(
     visibility = ["//visibility:public"],
     runtime_deps = [
         "//onos-yang-tools:yanglib",
-        "@maven//:org_slf4j_slf4j_nop",
+        "@maven//:org_slf4j_slf4j_jdk14",
     ],
 )
 
@@ -59,7 +59,8 @@ java_library(
         "@maven//:org_antlr_antlr4_runtime",
 
         "@maven//:com_google_guava_guava",
-        "@maven//:com_fasterxml_jackson_core_jackson_core"
+        "@maven//:com_fasterxml_jackson_core_jackson_core",
+        "@maven//:org_slf4j_slf4j_jdk14",
     ],
     visibility = ["//visibility:public"],
 )

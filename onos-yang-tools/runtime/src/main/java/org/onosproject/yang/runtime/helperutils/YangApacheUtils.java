@@ -27,24 +27,22 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Pattern;
 import org.onosproject.yang.compiler.tool.YangNodeInfo;
-import org.onosproject.yang.compiler.utils.UtilConstants;
 import org.onosproject.yang.model.YangModel;
 import org.slf4j.Logger;
 
 /**
  * Utilities for runtime to use apache tools.
- * We replaced the OSGi-related content.
  */
 public final class YangApacheUtils {
 
     private static final String SLASH = File.separator;
     private static final String HYPHEN = "-";
     private static final String PERIOD = ".";
-    private static final String YANG_RESOURCES = UtilConstants.YANG_RESOURCES;
-//    private static final String SYSTEM = SLASH + "system" + SLASH;
-//    private static final String MAVEN = "mvn:";
+    private static final String YANG_RESOURCES = "yang/resources";
+    private static final String SYSTEM = SLASH + "system" + SLASH;
+    private static final String MAVEN = "mvn:";
     private static final String JAR = ".jar";
-//    private static final String USER_DIRECTORY = "user.dir";
+    private static final String USER_DIRECTORY = "user.dir";
     private static final Logger log = getLogger(YangApacheUtils.class);
 
     // Forbid construction.
@@ -54,14 +52,16 @@ public final class YangApacheUtils {
     /**
      * Returns YANG model for generated module class.
      *
-     * @param jarPath jar file's path without suffix ".jar"
+     * @param modClass generated module class
      * @return YANG model
      */
-    public static YangModel getYangModel(String jarPath) {
-        // 获取context
+    public static YangModel getYangModel(Class<?> modClass) {
+        // TODO Ugly implementation for reading yang files and related ser files.
+        String jarPath = modClass.getResource("/odtn-oc/openconfig-types.yang").getFile()
+                .split(":")[1].split("!")[0].split("\\.jar")[0];
+        log.info("the JAR path is : \n\t{}", jarPath);
+        String metaPath = jarPath + SLASH + YANG_RESOURCES + SLASH;
         List<YangNodeInfo> nodeInfo = new ArrayList<>();
-        String metaPath;
-        metaPath = jarPath + SLASH + YANG_RESOURCES + SLASH;
         YangModel model = processJarParsingOperations(jarPath);
         if (model != null) {
             setNodeInfo(model, nodeInfo);
@@ -69,11 +69,14 @@ public final class YangApacheUtils {
             if (!nodeInfo.isEmpty()) {
                 return processYangModel(metaPath, nodeInfo,
                         model.getYangModelId(), false);
+            } else {
+                log.warn("node info is empty!");
             }
+        } else {
+            log.warn("model is null!");
         }
         return null;
     }
-
 
     /**
      * Process jar file for fetching YANG model.

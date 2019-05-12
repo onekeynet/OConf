@@ -17,11 +17,6 @@ package org.onekeynet.oconf.yang.registor;
 
 import com.google.common.collect.ImmutableMap;
 import org.onekeynet.oconf.yang.AbstractYangModelRegistrator;
-import org.onosproject.yang.model.DefaultYangModuleId;
-import org.onosproject.yang.model.YangModuleId;
-import org.onosproject.yang.runtime.AppModuleInfo;
-import org.onosproject.yang.runtime.DefaultAppModuleInfo;
-
 import org.onosproject.yang.gen.v1.ianaiftype.rev20170119.IanaIfType;
 import org.onosproject.yang.gen.v1.openconfigalarmtypes.rev20180116.OpenconfigAlarmTypes;
 import org.onosproject.yang.gen.v1.openconfigifethernet.rev20180410.OpenconfigIfEthernet;
@@ -38,16 +33,32 @@ import org.onosproject.yang.gen.v1.openconfigtransporttypes.rev20180516.Openconf
 import org.onosproject.yang.gen.v1.openconfigtypes.rev20180505.OpenconfigTypes;
 import org.onosproject.yang.gen.v1.openconfigyangtypes.rev20180424.OpenconfigYangTypes;
 import org.onosproject.yang.gen.v11.ietfinterfaces.rev20180220.IetfInterfaces;
+import org.onosproject.yang.model.DefaultYangModuleId;
+import org.onosproject.yang.model.YangModuleId;
+import org.onosproject.yang.runtime.AppModuleInfo;
+import org.onosproject.yang.runtime.DefaultAppModuleInfo;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 
 import java.util.Map;
+
 
 /**
  * Registrator for Openconfig Models with version as per ODTN RD.
  */
 public class OpenConfigOdtnModelRegistrator extends AbstractYangModelRegistrator {
 
+    protected final Logger log = LoggerFactory.getLogger(getClass());
+
+    public static void main(String[] args) {
+        // TODO only for testing.
+        OpenConfigOdtnModelRegistrator reg = new OpenConfigOdtnModelRegistrator();
+        System.out.println(reg.appInfo.toString());
+    }
+
     public OpenConfigOdtnModelRegistrator() {
-        super(OpenConfigOdtnModelRegistrator.class, getAppInfo(), "");
+        super(OpenConfigOdtnModelRegistrator.class, getAppInfo());
     }
 
 
@@ -92,4 +103,3 @@ public class OpenConfigOdtnModelRegistrator extends AbstractYangModelRegistrator
                 .build();
     }
 }
-
