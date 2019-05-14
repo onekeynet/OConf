@@ -6,6 +6,9 @@ yang-enabled NetConf server
 
 
 ## Problems
-1. Testing for `onos-yang-tools` via Bazel.
-2. Antlr usage in Bazel to replace antlr4 plugin in maven.
-3. Some lacking java classes used in yang.bzl.
+* Testing for `onos-yang-tools` via Bazel.
+* Antlr usage in Bazel to replace antlr4 plugin in maven.
+* RPC is not supported.
+* No Yang Validator
+* We remove the Event, its Listener, and relative Adaptor class to avoid more importing.
+* We remove the Delegate mechanism in ONOS Store, because the storage here is not distributed.

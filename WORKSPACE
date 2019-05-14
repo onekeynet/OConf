@@ -12,21 +12,36 @@ http_archive(
 )
 load("@rules_jvm_external//:defs.bzl", "maven_install")
 
+MVN_KRYO = [
+    "com.esotericsoftware:kryo:4.0.1",
+    "com.esotericsoftware:reflectasm:1.11.7",
+    "org.ow2.asm:asm:5.2",
+    "com.esotericsoftware:minlog:1.3.0",
+    "org.objenesis:objenesis:2.6",
+]
+
+MVN_COMMON_TXT = [
+    "org.apache.commons:commons-text:1.3",
+    "org.apache.commons:commons-lang3:3.7",
+]
+
+MVN_SLF4J = [
+    "org.slf4j:slf4j-api:1.7.25",
+    "org.slf4j:slf4j-jdk14:1.7.25",
+]
+
 maven_install(
-    artifacts = [
+    artifacts = MVN_KRYO + MVN_COMMON_TXT + MVN_SLF4J + [
         "commons-io:commons-io:2.6",
-        "org.slf4j:slf4j-api:1.7.25",
         "com.google.guava:guava-testlib:22.0",
         "junit:junit:4.12",
         "com.fasterxml.jackson.core:jackson-databind:2.9.5",
         "com.fasterxml.jackson.core:jackson-annotations:2.9.5",
         "org.apache.servicemix.bundles:org.apache.servicemix.bundles.dom4j:1.6.1_5",
         "org.antlr:antlr4-runtime:4.5.3",
-#        "org.slf4j:slf4j-nop:1.7.25",
         # chaining dependencies
         "com.google.guava:guava:22.0",
         "com.fasterxml.jackson.core:jackson-core:2.9.5",
-        "org.slf4j:slf4j-jdk14:1.7.25"
     ],
     repositories = [
         "https://repo1.maven.org/maven2",
