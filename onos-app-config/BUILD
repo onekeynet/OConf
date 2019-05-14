@@ -1,30 +1,18 @@
-load("//tools:variables.bzl", "JAVA_FILES")
+load("//tools:variables.bzl", "JAVA_FILES", "SLF4J", "KRYO", "COMMON_TXT")
 
-KRYO = [
-    "@maven//:com_esotericsoftware_kryo",
-    "@maven//:com_esotericsoftware_reflectasm",
-    "@maven//:org_ow2_asm_asm",
-    "@maven//:com_esotericsoftware_minlog",
-    "@maven//:org_objenesis_objenesis",
-]
-
-COMMON_TXT = [
-    "@maven//:org_apache_commons_commons_text",
-    "@maven//:org_apache_commons_commons_lang3",
-]
-
-DEPS = KRYO + COMMON_TXT + [
+DEPS = KRYO + COMMON_TXT + SLF4J + [
     "//onos-yang-tools:yanglib",
-    "@maven//:org_slf4j_slf4j_api",
-    "@maven//:org_slf4j_slf4j_jdk14",
     "@maven//:com_google_guava_guava",
     "//onos-core:onos-core",
+    "//yang:yang-registor",
 ]
 
 java_library(
     name = "dynamic-config-store",
     visibility = ["//visibility:public"],
-    srcs = ["src/main/java/org/onosproject/d/config/DataNodes.java"],
+    srcs = glob([
+        JAVA_FILES,
+    ]),
     deps = DEPS,
 )
 

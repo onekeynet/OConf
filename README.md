@@ -12,3 +12,9 @@ yang-enabled NetConf server
 * No Yang Validator
 * We remove the Event, its Listener, and relative Adaptor class to avoid more importing.
 * We remove the Delegate mechanism in ONOS Store, because the storage here is not distributed.
+* JAXB configuration in Netconf
+
+
+## ToDoList
+* please reference https://github.com/dana-i2cat/netconf-server to implement Netconf 
+connection and message dispatching.

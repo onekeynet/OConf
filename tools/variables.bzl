@@ -13,3 +13,18 @@ KRYO = [
         "@maven//:com_esotericsoftware_minlog",
         "@maven//:org_objenesis_objenesis",
 ]
+
+SLF4J = [
+        "@maven//:org_slf4j_slf4j_api",
+        "@maven//:org_slf4j_slf4j_jdk14",
+]
+
+COMMON_TXT = [
+    "@maven//:org_apache_commons_commons_text",
+    "@maven//:org_apache_commons_commons_lang3",
+]
+
+SSHD = [
+    "@maven//:org_apache_sshd_sshd_core",
+    "@maven//:org_apache_mina_mina_core",
+]

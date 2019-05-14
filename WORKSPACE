@@ -30,8 +30,13 @@ MVN_SLF4J = [
     "org.slf4j:slf4j-jdk14:1.7.25",
 ]
 
+MVN_SSHD = [
+    "org.apache.sshd:sshd-core:1.7.0",
+    "org.apache.mina:mina-core:2.0.16",
+]
+
 maven_install(
-    artifacts = MVN_KRYO + MVN_COMMON_TXT + MVN_SLF4J + [
+    artifacts = MVN_KRYO + MVN_COMMON_TXT + MVN_SLF4J + MVN_SSHD + [
         "commons-io:commons-io:2.6",
         "com.google.guava:guava-testlib:22.0",
         "junit:junit:4.12",
